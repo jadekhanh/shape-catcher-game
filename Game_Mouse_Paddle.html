@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phuong Khanh Tran</title>
+    </head>
+    <body>
+        <h1>Phuong Khanh Tran</h1>
+
+        <canvas id="JadeCanvas" width="600" height="400" style="border:1px solid #000000;"></canvas>
+
+        <script type="module">
+            import { Paddle } from "./Paddle.js";
+
+            // Get the canvas element and its context
+            const canvas = document.getElementById("JadeCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Create a paddle
+            const mypaddle = new Paddle(95, 60, "pink", "purple", "JadeCanvas", null);
+
+            // Update and draw the game objects
+            // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
+            function UpdateAndDraw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                mypaddle.draw();
+
+            }
+
+            // Run the animation loop every 50 milliseconds
+            // https://www.w3schools.com/jsref/met_win_setinterval.asp
+            setInterval(UpdateAndDraw, 50);
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Phuong Khanh Tran</title>
+</head>
+<body>
+<h1>Phuong Khanh Tran</h1>
+
+<canvas id="JadeCanvas" width="600" height="400" style="border:1px solid #000000;"></canvas>
+
+<script type="module">
+      import { Pentagon } from "./Pentagon.js";
+      import { Ball } from "./Ball.js";
+
+      // Get the canvas element and its context
+      const canvas = document.getElementById("JadeCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // Create a triangle
+      const myPentagon = new Pentagon(100, 150, "brown", "black", "JadeCanvas", null, 50, 50);
+
+      // Create a ball
+      const myBall = new Ball(200, 300, "yellow", "red", "JadeCanvas", null, 20);
+      myPentagon.listBall.push(myBall);     // to make sure that the pentagon will check if got hit by all balls created
+      const paddleObjects = [];
+
+      // Update and draw the game objects
+      function UpdateAndDraw() {
+          // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Iterate through all the balls in the Pentagon's listBall
+          for (const ball of myPentagon.listBall) {
+                myPentagon.update(ball);
+          }
+
+          myPentagon.draw();
+
+          for (const ball of myPentagon.ballList) {
+                ball.update(paddleObjects);
+                ball.draw();
+          }
+
+          myBall.update(paddleObjects);
+          myBall.draw();
+      }
+
+      // Run the animation loop every 50 milliseconds
+      // https://www.w3schools.com/jsref/met_win_setinterval.asp
+      setInterval(UpdateAndDraw, 50);
+
+</script>
+</body>
+</html>

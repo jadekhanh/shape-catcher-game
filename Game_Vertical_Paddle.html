@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Phuong Khanh Tran</title>
+</head>
+<body>
+<h1>Phuong Khanh Tran</h1>
+
+<canvas id="JadeCanvas" width="600" height="400" style="border:1px solid #000000;"></canvas>
+
+<script type="module">
+        import { Paddle } from "./Paddle.js";
+        import { Ball } from "./Ball.js";
+
+        // Get the canvas element and its context
+        const canvas = document.getElementById("JadeCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const paddleWidth = 20;
+        const paddleHeight = 100;
+
+        // Create a right paddle
+        const x_myPaddle1 = (canvas.width - paddleWidth);
+        const y_myPaddle1 = canvas.height - paddleHeight;
+        const myPaddle1 = new Paddle(x_myPaddle1, y_myPaddle1, "pink", "purple", "JadeCanvas", null);
+
+        // Create a left paddle
+        const x_myPaddle2 = 0;
+        const y_myPaddle2 = canvas.height - paddleHeight;
+        const myPaddle2 = new Paddle(x_myPaddle2, y_myPaddle2, "pink", "purple", "JadeCanvas", null);
+
+        let ballPassedPaddle = false;
+        const paddleObjects = [myPaddle1, myPaddle2];
+
+        // Create a ball
+        const myBall = new Ball(100, 100, "red", "black", "JadeCanvas", null, 20);
+
+        // Update and draw the game objects
+        // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
+        function UpdateAndDraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the paddle
+        myPaddle1.draw();
+        myPaddle2.draw();
+
+        // Update and draw the ball
+        myBall.update(paddleObjects);
+        myBall.draw();
+        }
+
+        // Run the animation loop every 50 milliseconds
+        // https://www.w3schools.com/jsref/met_win_setinterval.asp
+        setInterval(UpdateAndDraw, 50);
+
+</script>
+</body>
+</html>

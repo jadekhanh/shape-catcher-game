@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phuong Khanh Tran</title>
+    </head>
+    <body>
+        <h1>Phuong Khanh Tran</h1>
+
+        <canvas id="JadeCanvas" width="600" height="400" style="border:1px solid #000000;"></canvas>
+
+        <script type="module">
+            import { Paddle } from "./Paddle.js";
+            import { Ball } from "./Ball.js";
+            import { Triangle } from "./Triangle.js";
+
+            // Get the canvas element and its context
+            const canvas = document.getElementById("JadeCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Create a paddle
+            const mypaddle = new Paddle(95, 60, "pink", "purple", "JadeCanvas", null);
+
+            // Create two balls
+            const ball1 = new Ball(100, 100, "red", "black", "JadeCanvas", null, 10);
+            const ball2 = new Ball(120, 120, "blue", "black", "JadeCanvas", null, 10);
+
+            // Create a triangle
+            const triangle1 = new Triangle(75, 50, 25, 100, 120, 80, "green", "black", "JadeCanvas", null);
+
+            // Update and draw the game objects
+            // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect
+            function UpdateAndDraw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                mypaddle.draw();
+                ball1.update();
+                ball2.update();
+                triangle1.update();
+
+                ball1.draw();
+                ball2.draw();
+                triangle1.draw();
+            }
+
+            // Run the animation loop every 50 milliseconds
+            // https://www.w3schools.com/jsref/met_win_setinterval.asp
+            setInterval(UpdateAndDraw, 50);
+
+        </script>
+    </body>
+</html>

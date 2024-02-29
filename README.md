@@ -1,4 +1,4 @@
-# Bouncing Shape and Paddle Game
+# Shape Catcher Game
 
 ## Creator
 Phuong Khanh Tran (Jade)
